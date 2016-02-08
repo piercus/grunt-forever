@@ -6,6 +6,7 @@ var forever     = require('forever'),
     logFile     = undefined,
     killSignal  = 'SIGKILL',
     commandName = 'node',
+    max         = 3,
     commandMap  = {
       start:      startForeverWithIndex,
       stop:       stopOnProcess,
@@ -96,7 +97,7 @@ function startForeverWithIndex( index, doneCB ) {
       config = {
         command: commandName,
         append: true,
-        max: 3,
+        max: max,
         killSignal: killSignal
       };
       appendConfig('errFile', errFile);
@@ -176,6 +177,7 @@ module.exports = function(grunt) {
           operation = target || 'start';
 
       commandName = this.options().command;
+      max = undefined !== this.options().max ? this.options().max : max;
       logDir = undefined !== this.options().logDir ? path.join(process.cwd(), this.options().logDir) : logDir;
       outFile = undefined !== this.options().outFile ? path.join(logDir, this.options().outFile) : outFile;
       errFile = undefined !== this.options().errFile ? path.join(logDir, this.options().errFile) : errFile;
