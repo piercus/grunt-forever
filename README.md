@@ -82,6 +82,10 @@ Logs the forever outiput to file. If omitted, not generated.
 
 Exit signal specification. Defaults to `SIGKILL`.
 
+##### max ```number```
+
+Only run the specified script MAX times. Defaults to `3`.
+
 ### Config Example
 ```javascript
 forever: {
@@ -95,7 +99,8 @@ forever: {
   server2: {
     options: {
       index: 'otherindex.js',
-      logDir: 'logs'
+      logDir: 'logs',
+      max: 4
     }
   }
 }
